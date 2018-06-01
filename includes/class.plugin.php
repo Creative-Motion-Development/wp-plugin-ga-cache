@@ -85,7 +85,7 @@
 			protected function setTextDomain()
 			{
 				// Localization plugin
-				load_plugin_textdomain('google-analytics-cache', false, dirname(WGA_PLUGIN_BASE) . '/languages/');
+				load_plugin_textdomain('simple-google-analytics', false, dirname(WGA_PLUGIN_BASE) . '/languages/');
 			}
 			
 			protected function setModules()
@@ -95,7 +95,9 @@
 						array('libs/factory/bootstrap', 'factory_bootstrap_000', 'admin'),
 						array('libs/factory/forms', 'factory_forms_000', 'admin'),
 						array('libs/factory/pages', 'factory_pages_000', 'admin'),
+						array('libs/factory/notices', 'factory_notices_000', 'admin'),
 						array('libs/factory/clearfy', 'factory_clearfy_000', 'all')
+
 					));
 				}
 			}
@@ -106,6 +108,7 @@
 					return;
 				}
 				self::app()->registerPage('WGA_CachePage', WGA_PLUGIN_DIR . '/admin/pages/ga_cache.php');
+				self::app()->registerPage('WGA_MoreFeaturesPage', WGA_PLUGIN_DIR . '/admin/pages/more-features.php');
 			}
 			
 			private function adminScripts()

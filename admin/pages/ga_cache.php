@@ -30,7 +30,7 @@
 		 */
 		public function __construct(Wbcr_Factory000_Plugin $plugin)
 		{
-			$this->menu_title = __('Google Analytics Cache', 'google-analytics-cache');
+			$this->menu_title = __('Google Analytics Cache', 'simple-google-analytics');
 
 			if( !defined('LOADING_GA_CACHE_AS_ADDON') ) {
 				$this->internal = false;
@@ -46,8 +46,8 @@
 		public function getMenuTitle()
 		{
 			return defined('LOADING_GA_CACHE_AS_ADDON')
-				? __('Google Analytics Cache', 'google-analytics-cache')
-				: __('General', 'google-analytics-cache');
+				? __('Google Analytics Cache', 'simple-google-analytics')
+				: __('General', 'simple-google-analytics');
 		}
 
 
