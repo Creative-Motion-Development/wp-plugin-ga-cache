@@ -11,13 +11,13 @@
 		exit;
 	}
 
-	class WGA_CachePage extends Wbcr_FactoryPages400_ImpressiveThemplate {
+	class WGA_CachePage extends Wbcr_FactoryPages000_ImpressiveThemplate {
 
 		/**
 		 * The id of the page in the admin menu.
 		 *
 		 * Mainly used to navigate between pages.
-		 * @see FactoryPages400_AdminPage
+		 * @see FactoryPages000_AdminPage
 		 *
 		 * @since 1.0.0
 		 * @var string
@@ -26,9 +26,9 @@
 		public $page_menu_dashicon = 'dashicons-testimonial';
 
 		/**
-		 * @param Wbcr_Factory400_Plugin $plugin
+		 * @param Wbcr_Factory000_Plugin $plugin
 		 */
-		public function __construct(Wbcr_Factory400_Plugin $plugin)
+		public function __construct(Wbcr_Factory000_Plugin $plugin)
 		{
 			$this->menu_title = __('Google Analytics Cache', 'google-analytics-cache');
 
@@ -54,12 +54,11 @@
 		/**
 		 * We register notifications for some actions
 		 * @param array $notices
-		 * @param Wbcr_Factory400_Plugin $plugin
+		 * @param Wbcr_Factory000_Plugin $plugin
 		 * @return array
 		 */
 		public function actionsNotice($notices)
 		{
-
 
 			return $notices;
 		}

@@ -19,7 +19,7 @@
 					
 				}
 			} else {
-				class WGA_PluginFactory extends Wbcr_Factory400_Plugin {
+				class WGA_PluginFactory extends Wbcr_Factory000_Plugin {
 					
 				}
 			}
@@ -28,7 +28,7 @@
 		class WGA_Plugin extends WGA_PluginFactory {
 			
 			/**
-			 * @var Wbcr_Factory400_Plugin
+			 * @var Wbcr_Factory000_Plugin
 			 */
 			private static $app;
 			
@@ -51,7 +51,7 @@
 						? $data['plugin_parent']
 						: null;
 					
-					if( !($plugin_parent instanceof Wbcr_Factory400_Plugin) ) {
+					if( !($plugin_parent instanceof Wbcr_Factory000_Plugin) ) {
 						throw new Exception('An invalid instance of the class was passed.');
 					}
 					
@@ -75,7 +75,7 @@
 			}
 			
 			/**
-			 * @return Wbcr_Factory400_Plugin
+			 * @return Wbcr_Factory000_Plugin
 			 */
 			public static function app()
 			{
@@ -92,35 +92,25 @@
 			{
 				if( !$this->as_addon ) {
 					self::app()->load(array(
-						array('libs/factory/bootstrap', 'factory_bootstrap_400', 'admin'),
-						array('libs/factory/forms', 'factory_forms_400', 'admin'),
-						array('libs/factory/pages', 'factory_pages_400', 'admin'),
-						array('libs/factory/clearfy', 'factory_clearfy_200', 'all')
+						array('libs/factory/bootstrap', 'factory_bootstrap_000', 'admin'),
+						array('libs/factory/forms', 'factory_forms_000', 'admin'),
+						array('libs/factory/pages', 'factory_pages_000', 'admin'),
+						array('libs/factory/clearfy', 'factory_clearfy_000', 'all')
 					));
 				}
 			}
-			
+
 			private function registerPages()
 			{
 				if( $this->as_addon ) {
 					return;
 				}
 				self::app()->registerPage('WGA_CachePage', WGA_PLUGIN_DIR . '/admin/pages/ga_cache.php');
-
 			}
 			
 			private function adminScripts()
 			{
 				require(WGA_PLUGIN_DIR . '/admin/options.php');
-
-				if( defined('DOING_AJAX') && DOING_AJAX && isset($_REQUEST['action']) && $_REQUEST['action'] == 'wbcr_dan_hide_notices' ) {
-					require(WGA_PLUGIN_DIR . '/admin/ajax/hide-notice.php');
-				}
-
-				if( defined('DOING_AJAX') && DOING_AJAX && isset($_REQUEST['action']) && $_REQUEST['action'] == 'wbcr_dan_restore_notice' ) {
-					require(WGA_PLUGIN_DIR . '/admin/ajax/restore-notice.php');
-				}
-
 				require(WGA_PLUGIN_DIR . '/admin/boot.php');
 
 				$this->registerPages();
