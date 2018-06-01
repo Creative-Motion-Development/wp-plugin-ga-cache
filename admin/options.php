@@ -144,5 +144,5 @@
 		return $form;
 	}
 
-	add_filter('wbcr_clr_additionally_form_options', 'wbcr_ga_additionally_form_options', 10, 2);
+	add_filter('wbcr_clr_google_performance_form_options', 'wbcr_ga_additionally_form_options', 10, 2);
 

@@ -21,7 +21,7 @@
 				add_filter('cron_schedules', array($this, 'cronAdditions'));
 
 				// Load update script to schedule in wp_cron.
-				add_action('wbcr_clearfy_update_local_ga', array($this, 'updateLocalGoogleAnaliticScript'));
+				add_action('wbcr_ga_update_local_script', array($this, 'updateLocalGoogleAnaliticScript'));
 
 				if( !is_admin() ) {
 					$this->addGoogleAnaliticsScript();
@@ -64,7 +64,7 @@
 				// If file is not created yet, create now!
 				if( !file_exists($local_ga_file) ) {
 					ob_start();
-					do_action('wbcr_clearfy_update_local_ga');
+					do_action('wbcr_ga_update_local_script');
 					ob_end_clean();
 				}
 
@@ -119,7 +119,7 @@
 			echo "ga('send', 'pageview');";
 
 			echo $ga_adjusted_bounce_rate
-				? 'setTimeout("ga(' . "'send','event','adjusted bounce rate','" . $ga_adjusted_bounce_rate . " seconds')" . '"' . ',' . $ga_adjusted_bounce_rate * 1000 . ');' . PHP_EOL
+				? PHP_EOL . 'setTimeout("ga(' . "'send','event','adjusted bounce rate','" . $ga_adjusted_bounce_rate . " seconds')" . '"' . ',' . $ga_adjusted_bounce_rate * 1000 . ');'
 				: '';
 
 			echo PHP_EOL . '</script>' . PHP_EOL;
