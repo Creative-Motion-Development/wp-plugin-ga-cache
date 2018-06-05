@@ -25,11 +25,12 @@
 		}
 
 		$notices[] = array(
-			'id' => 'ga_plugin_upgrade_notice',
+			'id' => 'ga_plugin_upgrade_notice1',
 			'type' => 'warning',
 			'dismissible' => true,
 			'dismiss_expires' => 0,
-			'text' => '<p>' . __('В плагине Simple Google Analytics были внесены серьезные изменения.', 'simple-google-analytics') . '</p>' . '<p>' . __('К сожалению, старая версия плагина 2.2.2 больше не поддерживается, но вы можете скачать ее из репозитория Wordpress, если новое обновление вам не подходит.', 'simple-google-analytics') . '</p>' . '<p>' . __('Мы обновили код и решили проблемы с совместимостью последних версий Wordpress и PHP. Также мы добавили возможность кеширования google аналитики, чтобы ваш сайт загружался еще быстрее. Название плагина было изменено на Google Analytic cache, но все функции подключения Google аналитики остались прежними.', 'simple-google-analytics') . '</p>' . '<p>' . __('Пожалуйста, проверьте настройки плагина и его работу на вашем сайте, мы беспокоимся о вас и хотим, чтобы у вас не было никаких проблем с новой версией нашего плагина.', 'simple-google-analytics') . '</p>' . '<p>' . __('Мы хотим лучше заботиться о скорости и безопасности вашего сайта, по мимо этого простого плагина, вы должны обязательно попробовать наш плагин базовой оптимизации Wordpress (Clearfy), он уже включает в себя функции этого плагина и содержит огромное количество функции для оптимизации вашего сайта. Подробнее о плагине Clearfy', 'simple-google-analytics') . '</p>'
+			'text' => '<p>' . sprintf(__('The <b>Simple Google Analytics</b> plugin has some major changes!', 'simple-google-analytics') . '</p>' . '<p>' . __('Unfortunately, the old version of the plugin (2.2.2) is no longer supported, but you still can download it from the WordPress repository in case if the new release doesn’t work for you.', 'simple-google-analytics') . '</p>' . '<p>' . __('We’ve updated the code and fixed the compatibility issue for the latest WordPress and PHP versions. We’ve also added additional feature of the Local Google Analytics – this way your website will load faster. The plugin’s name has been changed to Local Google Analytics, but all features remained the same.', 'simple-google-analytics') . '</p>' . '<p>' . __('Please, check <a href="%s">plugin settings</a> and its performance on your website. We do care about you and want to avoid any problems with the new version.', 'simple-google-analytics') . '</p>', admin_url('options-general.php?page=ga_cache-' . WGA_Plugin::app()
+						->getPluginName())) . '</p>'
 		);
 
 		return $notices;

@@ -1,10 +1,10 @@
 <?php
 	/**
-	 * Plugin Name: Webcraftic Google Analytics Cache (Old name: Simple Google Analytics)
+	 * Plugin Name: Webcraftic Local Google Analytics
 	 * Plugin URI: https://wordpress.org/plugins/simple-google-analytics/
-	 * Description: To improve Google Page Speed indicators Analytics caching is needed. However, it can also slightly increase your website loading speed, because Analytics js files will load locally. The second case that you might need these settings is the usual Google Analytics connection to your website. You do not need to do this with other plugins or insert the tracking code into your theme.
-	 * Author: Webcraftic <wordpress.webraftic@gmail.com>
-	 * Version: 2.3.0
+	 * Description: Old plugin name: Simple Google Analytics. To improve Google Page Speed indicators Analytics caching is needed. However, it can also slightly increase your website loading speed, because Analytics js files will load locally. The second case that you might need these settings is the usual Google Analytics connection to your website. You do not need to do this with other plugins or insert the tracking code into your theme.
+	 * Author: Webcraftic <wordpress.webraftic@gmail.com>, JeromeMeyer62<jerome.meyer@hollywoud.net>
+	 * Version: 3.0.0
 	 * Text Domain: simple-google-analytics
 	 * Domain Path: /languages/
 	 * Author URI: http://clearfy.pro
@@ -37,7 +37,7 @@
 			if( $old_wp_version_error ) {
 				?>
 				<div class="notice notice-error">
-					<p><?php _e('You use the old version of Wordpress to use the <b>Webcraftic Google Analytics Cache (Old name: Simple Google Analytics)</b> plugin, you must upgrade your Wordpress to the minimum version 4.2!', 'simple-google-analytics'); ?></p>
+					<p><?php _e('You use the old version of Wordpress to use the <b>Webcraftic Local Google Analytics (Old name: Simple Google Analytics)</b> plugin, you must upgrade your Wordpress to the minimum version 4.2!', 'simple-google-analytics'); ?></p>
 				</div>
 			<?php
 			}
@@ -62,8 +62,8 @@
 			new WGA_Plugin(__FILE__, array(
 				'prefix' => 'wbcr_gac_',
 				'plugin_name' => 'wbcr_gac',
-				'plugin_title' => __('Webcraftic Google Analytics Cache', 'simple-google-analytics'),
-				'plugin_version' => '2.3.0',
+				'plugin_title' => __('Webcraftic Local Google Analytics', 'simple-google-analytics'),
+				'plugin_version' => '3.0.0',
 				'required_php_version' => '5.2',
 				'required_wp_version' => '4.2',
 				'plugin_build' => 'free',
