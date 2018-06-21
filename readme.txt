@@ -82,6 +82,8 @@ We invite you to check out a few other related free plugins that our team has al
 No plugin does not support multisites. This is temporary and we will try to add support for networks in the future.
 
 == Changelog ==
+= version 3.0.1 =
+* Fixed small bugs
 = version 3.0.0 =
 * The Simple Google Analytics plugin has some major changes. Unfortunately, the old version of the plugin (2.2.2) is no longer supported, but you still can download it from the WordPress repository in case if the new release doesn’t work for you.
   We’ve updated the code and fixed the compatibility issue for the latest WordPress and PHP versions. We’ve also added additional feature of the Google Analytics cache – this way your website will load faster. The plugin’s name has been changed to Google Analytics cache, but all features remained the same.

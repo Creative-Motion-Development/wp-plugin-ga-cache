@@ -24,13 +24,21 @@
 			return $notices;
 		}
 
+		$text = '<p>' . __('The <b>Simple Google Analytics</b> plugin has some major changes!', 'simple-google-analytics') . '</p>';
+		$text .= '<p>' . __('Unfortunately, the old version of the plugin (2.2.2) is no longer supported, but you still can download it from the WordPress repository in case if the new release doesn’t work for you.', 'simple-google-analytics') . '</p>';
+		$text .= '<p>' . __('We’ve updated the code and fixed the compatibility issue for the latest WordPress and PHP versions. We’ve also added additional feature of the Local Google Analytics – this way your website will load faster. The plugin’s name has been changed to Local Google Analytics, but all features remained the same.', 'simple-google-analytics') . '</p>';
+		$text .= '<p>' . sprintf(__('Please, check <a href="%s">plugin settings</a> and its performance on your website. We do care about you and want to avoid any problems with the new version.', 'simple-google-analytics') . '</p>', admin_url('options-general.php?page=ga_cache-' . WGA_Plugin::app()
+					->getPluginName())) . '</p>';
+		$text .= '<p>' . sprintf(__('We are aimed to pay more attention to the speed and security aspects of your website. That’s why you should definitely try our basic WordPress optimization plugin as well. Clearfy includes functionality of this plugin and has many additional features for the website optimization:
+<a href="%s">Donwload Clearfy for free</a>', 'simple-google-analytics'), 'https://clearfy.pro?utm_source=wordpress.org&utm_campaign=' . WGA_Plugin::app()
+					->getPluginName()) . '</p>';
+
 		$notices[] = array(
 			'id' => 'ga_plugin_upgrade_notice1',
 			'type' => 'warning',
 			'dismissible' => true,
 			'dismiss_expires' => 0,
-			'text' => '<p>' . sprintf(__('The <b>Simple Google Analytics</b> plugin has some major changes!', 'simple-google-analytics') . '</p>' . '<p>' . __('Unfortunately, the old version of the plugin (2.2.2) is no longer supported, but you still can download it from the WordPress repository in case if the new release doesn’t work for you.', 'simple-google-analytics') . '</p>' . '<p>' . __('We’ve updated the code and fixed the compatibility issue for the latest WordPress and PHP versions. We’ve also added additional feature of the Local Google Analytics – this way your website will load faster. The plugin’s name has been changed to Local Google Analytics, but all features remained the same.', 'simple-google-analytics') . '</p>' . '<p>' . __('Please, check <a href="%s">plugin settings</a> and its performance on your website. We do care about you and want to avoid any problems with the new version.', 'simple-google-analytics') . '</p>', admin_url('options-general.php?page=ga_cache-' . WGA_Plugin::app()
-						->getPluginName())) . '</p>'
+			'text' => $text
 		);
 
 		return $notices;
@@ -138,7 +146,7 @@
 	 */
 	function wbcr_ga_set_plugin_meta($links, $file)
 	{
-		if( $file == WCTR_PLUGIN_BASE ) {
+		if( $file == WGA_PLUGIN_BASE ) {
 
 			$url = 'https://clearfy.pro';
 
