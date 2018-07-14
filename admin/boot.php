@@ -20,7 +20,7 @@
 	 */
 	function wbcr_ga_admin_conflict_notices_error($notices, $plugin_name)
 	{
-		if( $plugin_name != WGA_Plugin::app()->getPluginName() ) {
+		if( defined('LOADING_GA_CACHE_AS_ADDON') || $plugin_name != WGA_Plugin::app()->getPluginName() ) {
 			return $notices;
 		}
 
@@ -52,6 +52,10 @@
 	function wbcr_ga_upgrade()
 	{
 		global $wpdb;
+
+		if( defined('LOADING_GA_CACHE_AS_ADDON') ) {
+			return;
+		}
 
 		$is_migrate_up_to_230 = WGA_Plugin::app()->getOption('is_migrate_up_to_230', false);
 
