@@ -29,7 +29,7 @@
 			'name' => 'ga_cache',
 			'title' => __('Google Analytics Cache', 'simple-google-analytics'),
 			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'grey'),
-			'hint' => __('If you enable this option, the plugin will begin to save a local copy of Google Analytics to speed up the loading of your website and improve Google Page Speed.', 'simple-google-analytics') . '<br>--<br><span class="hint-warnign-color">' . __('ATTENTION! Before using this option, remove the previously installed Google Analytics code inside your theme or plugins associated with this feature!', 'simple-google-analytics') . '</span>',
+			'hint' => __('If you enable this option, the plugin will begin to save a local copy of Google Analytics to speed up the loading of your website and improve Google Page Speed.', 'simple-google-analytics') . '<br>--<br><span class="wbcr-factory-light-orange-color">' . __('ATTENTION! Before using this option, remove the previously installed Google Analytics code inside your theme or plugins associated with this feature!', 'simple-google-analytics') . '</span>',
 			'default' => false,
 			'eventsOn' => array(
 				'show' => '#wbcr-clearfy-performance-ga-block'
