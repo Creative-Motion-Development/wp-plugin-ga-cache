@@ -89,6 +89,28 @@
 	add_action('init', 'wbcr_ga_upgrade');
 
 	/**
+	 * This action is executed when the component of the Clearfy plugin is activate and if this component is name ga_cache
+	 */
+	add_action('wbcr_clearfy_activated_component', function ($component_name) {
+		if( $component_name == 'ga_cache' ) {
+			require_once WGA_PLUGIN_DIR . '/admin/activation.php';
+			$plugin = new WGA_Activation(WGA_Plugin::app());
+			$plugin->activate();
+		}
+	});
+
+	/**
+	 * This action is executed when the component of the Clearfy plugin is deactivated and if this component is name ga_cache
+	 */
+	add_action('wbcr_clearfy_pre_deactivate_component', function ($component_name) {
+		if( $component_name == 'ga_cache' ) {
+			require_once WGA_PLUGIN_DIR . '/admin/activation.php';
+			$plugin = new WGA_Activation(WGA_Plugin::app());
+			$plugin->deactivate();
+		}
+	});
+
+	/**
 	 * @param $options
 	 * @return array
 	 */
@@ -179,7 +201,7 @@
 	 */
 	function wbcr_ga_rating_widget_url($page_url, $plugin_name)
 	{
-		if( $plugin_name == WGA_Plugin::app()->getPluginName() ) {
+		if( !defined('LOADING_GA_CACHE_AS_ADDON') && ($plugin_name == WGA_Plugin::app()->getPluginName()) ) {
 			return 'https://wordpress.org/support/plugin/simple-google-analytics/reviews/#new-post';
 		}
 

@@ -50,18 +50,24 @@
 				: __('General', 'simple-google-analytics');
 		}
 
-
 		/**
-		 * We register notifications for some actions
-		 * @param array $notices
-		 * @param Wbcr_Factory000_Plugin $plugin
-		 * @return array
+		 * Requests assets (js and css) for the page.
+		 *
+		 * @see Wbcr_FactoryPages000_AdminPage
+		 *
+		 * @since 1.0.0
+		 * @return void
 		 */
-		public function actionsNotice($notices)
+		public function assets($scripts, $styles)
 		{
+			parent::assets($scripts, $styles);
 
-			return $notices;
+			// Add Clearfy styles for HMWP pages
+			if( defined('WBCR_CLEARFY_PLUGIN_ACTIVE') ) {
+				$this->styles->add(WCL_PLUGIN_URL . '/admin/assets/css/general.css');
+			}
 		}
+
 
 		/**
 		 * Permalinks options.

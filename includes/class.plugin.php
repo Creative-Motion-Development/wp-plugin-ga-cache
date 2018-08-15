@@ -70,6 +70,7 @@
 				$this->globalScripts();
 				
 				if( is_admin() ) {
+					$this->initActivation();
 					$this->adminScripts();
 				}
 			}
@@ -100,6 +101,12 @@
 
 					));
 				}
+			}
+
+			protected function initActivation()
+			{
+				require_once(WGA_PLUGIN_DIR . '/admin/activation.php');
+				self::app()->registerActivation('WGA_Activation');
 			}
 
 			private function registerPages()
