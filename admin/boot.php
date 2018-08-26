@@ -44,7 +44,7 @@
 		return $notices;
 	}
 
-	add_filter('wbcr_factory_admin_notices', 'wbcr_ga_admin_conflict_notices_error', 10, 2);
+	add_filter('wbcr_factory_notices_000_list', 'wbcr_ga_admin_conflict_notices_error', 10, 2);
 
 	/**
 	 * Migrate settings from the old plugin to the new one.
