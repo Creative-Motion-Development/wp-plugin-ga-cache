@@ -48,7 +48,7 @@
 		 */
 		public function deactivate()
 		{
-			WGA_Plugin::app()->updateOption('ga_cache', 0);
+			//WGA_Plugin::app()->updateOption('ga_cache', 0);
 
 			if( wp_next_scheduled('wbcr_clearfy_update_local_ga') ) {
 				wp_clear_scheduled_hook('wbcr_clearfy_update_local_ga');

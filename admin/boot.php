@@ -91,7 +91,7 @@
 	/**
 	 * This action is executed when the component of the Clearfy plugin is activate and if this component is name ga_cache
 	 */
-	add_action('wbcr_clearfy_activated_component', function ($component_name) {
+	add_action('wbcr/clearfy/activated_component', function ($component_name) {
 		if( $component_name == 'ga_cache' ) {
 			require_once WGA_PLUGIN_DIR . '/admin/activation.php';
 			$plugin = new WGA_Activation(WGA_Plugin::app());
