@@ -37,6 +37,8 @@
 			 */
 			private $as_addon;
 			
+			private $network_active;
+			
 			/**
 			 * @param string $plugin_path
 			 * @param array $data
@@ -45,6 +47,8 @@
 			public function __construct($plugin_path, $data)
 			{
 				$this->as_addon = isset($data['as_addon']);
+				
+				$this->network_active = ( is_multisite() && array_key_exists( WGA_PLUGIN_BASE, (array) get_site_option( 'active_sitewide_plugins' ) ) );
 				
 				if( $this->as_addon ) {
 					$plugin_parent = isset($data['plugin_parent']) ? $data['plugin_parent'] : null;
@@ -95,6 +99,13 @@
 					));
 				}
 			}
+			
+			public function isNetworkActive() {
+				if ( $this->network_active ) {
+					return true;
+				}
+				return false;
+			}
 
 			protected function initActivation()
 			{
@@ -105,6 +116,10 @@
 			private function registerPages()
 			{
 				if( $this->as_addon ) {
+					return;
+				}
+				
+				if ( $this->isNetworkActive() and ! is_network_admin() ) {
 					return;
 				}
 				self::app()->registerPage('WGA_CachePage', WGA_PLUGIN_DIR . '/admin/pages/ga_cache.php');
