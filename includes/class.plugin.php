@@ -47,9 +47,7 @@
 				$this->as_addon = isset($data['as_addon']);
 				
 				if( $this->as_addon ) {
-					$plugin_parent = isset($data['plugin_parent'])
-						? $data['plugin_parent']
-						: null;
+					$plugin_parent = isset($data['plugin_parent']) ? $data['plugin_parent'] : null;
 					
 					if( !($plugin_parent instanceof Wbcr_Factory000_Plugin) ) {
 						throw new Exception('An invalid instance of the class was passed.');
@@ -64,7 +62,8 @@
 					parent::__construct($plugin_path, $data);
 				}
 
-				$this->setTextDomain();
+				self::app()->setTextDomain('simple-google-analytics', WGA_PLUGIN_DIR);
+
 				$this->setModules();
 				
 				$this->globalScripts();
@@ -81,23 +80,6 @@
 			public static function app()
 			{
 				return self::$app;
-			}
-
-			// todo: перенести этот медот в фреймворк
-			protected function setTextDomain()
-			{
-				// Localization plugin
-				//load_plugin_textdomain('simple-google-analytics', false, dirname(WCL_PLUGIN_BASE) . '/languages/');
-
-				$domain = 'simple-google-analytics';
-				$locale = apply_filters('plugin_locale', is_admin()
-					? get_user_locale()
-					: get_locale(), $domain);
-				$mofile = $domain . '-' . $locale . '.mo';
-
-				if( !load_textdomain($domain, WGA_PLUGIN_DIR . '/languages/' . $mofile) ) {
-					load_muplugin_textdomain($domain);
-				}
 			}
 
 			protected function setModules()
