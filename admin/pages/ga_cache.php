@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	class WGA_CachePage extends Wbcr_FactoryPages000_ImpressiveThemplate {
+	class WGA_CachePage extends Wbcr_FactoryClearfy000_PageBase {
 
 		/**
 		 * The id of the page in the admin menu.
@@ -50,25 +50,6 @@
 				? __('Google Analytics Cache', 'simple-google-analytics')
 				: __('General', 'simple-google-analytics');
 		}
-
-		/**
-		 * Requests assets (js and css) for the page.
-		 *
-		 * @see Wbcr_FactoryPages000_AdminPage
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function assets($scripts, $styles)
-		{
-			parent::assets($scripts, $styles);
-
-			// Add Clearfy styles for HMWP pages
-			if( defined('WBCR_CLEARFY_PLUGIN_ACTIVE') ) {
-				$this->styles->add(WCL_PLUGIN_URL . '/admin/assets/css/general.css');
-			}
-		}
-
 
 		/**
 		 * Permalinks options.
