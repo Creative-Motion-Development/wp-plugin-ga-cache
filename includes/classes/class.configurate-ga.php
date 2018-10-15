@@ -17,7 +17,7 @@
 		public function registerActionsAndFilters()
 		{
 
-			if( $this->getOption('ga_cache') ) {
+			if( $this->getPopulateOption('ga_cache') ) {
 				add_filter('cron_schedules', array($this, 'cronAdditions'));
 
 				// Load update script to schedule in wp_cron.
@@ -57,7 +57,7 @@
 
 		private function addGoogleAnaliticsScript()
 		{
-			$ga_tracking_id = $this->getOption('ga_tracking_id');
+			$ga_tracking_id = $this->getPopulateOption('ga_tracking_id');
 
 			if( !empty($ga_tracking_id) ) {
 				$local_ga_file = WGA_PLUGIN_DIR . '/cache/local-ga.js';
@@ -68,8 +68,8 @@
 					ob_end_clean();
 				}
 
-				$ga_script_position = $this->getOption('ga_script_position', 'footer');
-				$ga_enqueue_order = $this->getOption('ga_enqueue_order', 0);
+				$ga_script_position = $this->getPopulateOption('ga_script_position', 'footer');
+				$ga_enqueue_order = $this->getPopulateOption('ga_enqueue_order', 0);
 
 				switch( $ga_script_position ) {
 					case 'header':
@@ -86,17 +86,17 @@
 		 */
 		public function printGoogleAnalitics()
 		{
-			$ga_tracking_id = $this->getOption('ga_tracking_id');
-			$ga_track_admin = $this->getOption('ga_track_admin');
+			$ga_tracking_id = $this->getPopulateOption('ga_tracking_id');
+			$ga_track_admin = $this->getPopulateOption('ga_track_admin');
 
 			// If user is admin we don't want to render the tracking code, when option is disabled.
 			if( empty($ga_tracking_id) || (current_user_can('manage_options') && (!$ga_track_admin)) ) {
 				return;
 			}
 
-			$ga_adjusted_bounce_rate = $this->getOption('ga_adjusted_bounce_rate', 0);
-			$ga_anonymize_ip = $this->getOption('ga_anonymize_ip', false);
-			$ga_caos_disable_display_features = $this->getOption('ga_caos_disable_display_features', false);
+			$ga_adjusted_bounce_rate = $this->getPopulateOption('ga_adjusted_bounce_rate', 0);
+			$ga_anonymize_ip = $this->getPopulateOption('ga_anonymize_ip', false);
+			$ga_caos_disable_display_features = $this->getPopulateOption('ga_caos_disable_display_features', false);
 
 			echo "<!-- Google Analytics Local by " . $this->plugin->getPluginTitle() . " -->" . PHP_EOL;
 

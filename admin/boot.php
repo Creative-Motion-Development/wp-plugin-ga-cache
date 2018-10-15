@@ -57,7 +57,7 @@
 			return;
 		}
 
-		$is_migrate_up_to_230 = WGA_Plugin::app()->getOption('is_migrate_up_to_230', false);
+		$is_migrate_up_to_230 = WGA_Plugin::app()->getPopulateOption('is_migrate_up_to_230', false);
 
 		if( !$is_migrate_up_to_230 ) {
 			$old_plugin_tracking_id = get_option('sga_analytics_id');
@@ -66,8 +66,8 @@
 			$old_plugin_sga_render_when_loggedin = (int)get_option('sga_render_when_loggedin');
 
 			if( !empty($old_plugin_tracking_id) ) {
-				WGA_Plugin::app()->updateOption('ga_cache', 1);
-				WGA_Plugin::app()->updateOption('ga_tracking_id', $old_plugin_tracking_id);
+				WGA_Plugin::app()->updatePopulateOption('ga_cache', 1);
+				WGA_Plugin::app()->updatePopulateOption('ga_tracking_id', $old_plugin_tracking_id);
 
 				$script_position = 'footer';
 
@@ -75,14 +75,14 @@
 					$script_position = 'header';
 				}
 
-				WGA_Plugin::app()->updateOption('ga_script_position', $script_position);
-				WGA_Plugin::app()->updateOption('ga_anonymize_ip', $old_plugin_demographic_and_interest);
-				WGA_Plugin::app()->updateOption('ga_track_admin', $old_plugin_sga_render_when_loggedin);
+				WGA_Plugin::app()->updatePopulateOption('ga_script_position', $script_position);
+				WGA_Plugin::app()->updatePopulateOption('ga_anonymize_ip', $old_plugin_demographic_and_interest);
+				WGA_Plugin::app()->updatePopulateOption('ga_track_admin', $old_plugin_sga_render_when_loggedin);
 
 				$wpdb->query("DELETE FROM {$wpdb->prefix}options WHERE option_name LIKE 'sga_%';");
 			}
 
-			WGA_Plugin::app()->updateOption('is_migrate_up_to_230', 1);
+			WGA_Plugin::app()->updatePopulateOption('is_migrate_up_to_230', 1);
 		}
 	}
 

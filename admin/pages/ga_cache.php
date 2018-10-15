@@ -61,7 +61,7 @@
 		 * @since 1.0.0
 		 * @return mixed[]
 		 */
-		public function getOptions()
+		public function getPopulateOptions()
 		{
 			$options = wbcr_ga_get_plugin_options();
 
