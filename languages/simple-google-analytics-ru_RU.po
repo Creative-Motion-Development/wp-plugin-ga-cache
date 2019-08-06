@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/class-rio-plugin.php\n"
 "X-Poedit-SearchPath-2: admin/options.php\n"
 "X-Poedit-SearchPath-3: includes/classes/class.configurate-ga.php\n"
-"X-Poedit-SearchPath-4: admin/pages/ga_cache.php\n"
+"X-Poedit-SearchPath-4: admin/pages/class-pages-general-settings.php\n"
 
 #: admin/options.php:23
 msgid "<strong>Google Analytics cache</strong>."

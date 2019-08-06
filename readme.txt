@@ -1,10 +1,10 @@
 === Local Google Analytics for Wordpress - caches external requests ===
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,gtag
-Contributors: webcraftic, JeromeMeyer62
+Contributors: webcraftic, alexkovalevv, JeromeMeyer62
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
-Tested up to: 4.9
-Requires PHP: 5.2
+Tested up to: 5.2
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2
 
@@ -82,6 +82,11 @@ We invite you to check out a few other related free plugins that our team has al
 No plugin does not support multisites. This is temporary and we will try to add support for networks in the future.
 
 == Changelog ==
+= 3.1.0 =
+* Added: Compatibility with Wordpress 4.2 - 5.x
+* Added: Multisite support
+* Fixed minor bugs
+
 = version 3.0.1 =
 * Fixed small bugs
 = version 3.0.0 =
