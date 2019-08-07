@@ -1,6 +1,6 @@
 === Local Google Analytics for Wordpress - caches external requests ===
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,gtag
-Contributors: webcraftic, alexkovalevv, JeromeMeyer62
+Contributors: webcraftic, alexkovalevv, JeromeMeyer62, creativemotion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
 Tested up to: 5.2
