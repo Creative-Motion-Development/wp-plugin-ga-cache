@@ -65,8 +65,15 @@ class WGA_CachePage extends Wbcr_FactoryClearfy000_PageBase {
 		$this->plugin = $plugin;
 	}
 
-	public function getMenuTitle() {
-		return defined( 'LOADING_GA_CACHE_AS_ADDON' ) ? __( 'Google Analytics Cache', 'simple-google-analytics' ) : __( 'General', 'simple-google-analytics' );
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  3.1.0
+	 * @return string|void
+	 */
+	public function getPageTitle() {
+		return __( 'General', 'simple-google-analytics' );
 	}
 
 	/**

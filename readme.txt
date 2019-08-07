@@ -36,9 +36,6 @@ Also if you want to gain 100 performance rating on Google Pagespeed Insights, th
 
 If you want to help with the translation, please contact me through this site or through the contacts inside the plugin.
 
-#### BIG THANKS ####
-Many thanks to [Jerome Meyer](http://www.arobase62.fr/2011/03/23/simple-google-analytics/), for his great contribution to the development of this plugin.
-
 #### THANKS TO THE PLUGINS' AUTHORS ####
 We used some plugins functions:
 <strong>GA Google Analytics</strong>, <strong>NK Google Analytics</strong>, <strong>Complete Analytics Optimization Suite (CAOS)</strong>, <strong>Clearfy — WordPress optimization plugin and disable ultimate tweaker</strong>, <strong>Enhanced Ecommerce Google Analytics Plugin for WooCommerce</strong>
@@ -85,7 +82,7 @@ No plugin does not support multisites. This is temporary and we will try to add 
 = 3.1.0 =
 * Added: Compatibility with Wordpress 4.2 - 5.x
 * Added: Multisite support
-* Fixed minor bugs
+* Fixed: Minor bugs
 
 = version 3.0.1 =
 * Fixed small bugs
