@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Webcraftic Local Google Analytics
- * Plugin URI: https://wordpress.org/plugins/simple-google-analytics/
+ * Plugin URI: https://webcraftic.com
  * Description: Old plugin name: Simple Google Analytics. To improve Google Page Speed indicators Analytics caching is needed. However, it can also slightly increase your website loading speed, because Analytics js files will load locally. The second case that you might need these settings is the usual Google Analytics connection to your website. You do not need to do this with other plugins or insert the tracking code into your theme.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
  * Version: 3.1.0
@@ -64,7 +64,7 @@ $plugin_info = array(
 );
 
 $wga_compatibility = new Wbcr_Factory000_Requirements( __FILE__, array_merge( $plugin_info, array(
-	'plugin_already_activate'          => defined( 'WGA_PLUGIN_DIR' ),
+	'plugin_already_activate'          => defined( 'WGA_PLUGIN_ACTIVE' ),
 	'required_php_version'             => '5.4',
 	'required_wp_version'              => '4.2.0',
 	'required_clearfy_check_component' => false
@@ -191,7 +191,7 @@ try {
 	define( 'WGA_PLUGIN_THROW_ERROR', true );
 
 	$wga_plugin_error_func = function () use ( $e ) {
-		$error = sprintf( "The %s plugin has stopped. <b>Error:</b> %s Code: %s", 'Local Google Analytics', $e->getMessage(), $e->getCode() );
+		$error = sprintf( "The %s plugin has stopped. <b>Error:</b> %s Code: %s", 'Webcraftic Local Google Analytics', $e->getMessage(), $e->getCode() );
 		echo '<div class="notice notice-error"><p>' . $error . '</p></div>';
 	};
 
