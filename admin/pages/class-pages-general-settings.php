@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Страница общих настроек для этого плагина.
  *
@@ -11,12 +16,6 @@
  * @copyright (c) 2018 Webraftic Ltd
  * @version       1.0
  */
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 class WGA_CachePage extends Wbcr_FactoryClearfy000_PageBase {
 
 	/**

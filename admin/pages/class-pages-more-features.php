@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Рекламная страница.
  *
@@ -15,12 +20,6 @@
  * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
  * @copyright (c) 2018 Webraftic Ltd
  */
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 class WGA_MoreFeaturesPage extends Wbcr_FactoryClearfy000_MoreFeaturesPage {
 
 }

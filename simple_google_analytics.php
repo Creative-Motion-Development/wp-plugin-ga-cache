@@ -179,7 +179,7 @@ require_once( WGA_PLUGIN_DIR . '/libs/onepress/compiler/boot.php' );
  */
 
 require_once( WGA_PLUGIN_DIR . '/libs/factory/core/boot.php' );
-require_once( WGA_PLUGIN_DIR . '/includes/class.plugin.php' );
+require_once( WGA_PLUGIN_DIR . '/includes/class-plugin.php' );
 
 try {
 	new WGA_Plugin( __FILE__, array_merge( $plugin_info, array(
