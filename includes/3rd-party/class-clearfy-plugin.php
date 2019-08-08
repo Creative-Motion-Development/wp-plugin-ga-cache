@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Local Google Analytic
  *
@@ -6,12 +11,6 @@
  * @copyright (c) 2018 Webraftic Ltd
  * @version       1.0
  */
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 class WGA_Plugin {
 
 	/**

@@ -38,13 +38,13 @@ if ( ! defined( 'WGA_PLUGIN_ACTIVE' ) ) {
 		require_once( WGA_PLUGIN_DIR . '/includes/3rd-party/class-clearfy-plugin.php' );
 		new WGA_Plugin();
 	} catch( Exception $e ) {
-		$wrio_plugin_error_func = function () use ( $e ) {
+		$wga_plugin_error_func = function () use ( $e ) {
 			$error = sprintf( "The %s plugin has stopped. <b>Error:</b> %s Code: %s", 'Webcraftic Local Google Analytic', $e->getMessage(), $e->getCode() );
 			echo '<div class="notice notice-error"><p>' . $error . '</p></div>';
 		};
 
-		add_action( 'admin_notices', $wrio_plugin_error_func );
-		add_action( 'network_admin_notices', $wrio_plugin_error_func );
+		add_action( 'admin_notices', $wga_plugin_error_func );
+		add_action( 'network_admin_notices', $wga_plugin_error_func );
 	}
 }
 
