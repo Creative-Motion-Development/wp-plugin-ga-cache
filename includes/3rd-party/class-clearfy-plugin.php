@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Local Google Analytic
  *
- * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alex Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 2018 Webraftic Ltd
  * @version       1.0
  */
@@ -19,17 +19,17 @@ class WGA_Plugin {
 	 */
 	private static $app;
 
-	 /**
-     * Конструктор
-     *
-     * Применяет конструктор родительского класса и записывает экземпляр текущего класса в свойство $app.
-     * Подробнее о свойстве $app см. self::app()
-     *
-     * @param string $plugin_path
-     * @param array  $data
-     *
-     * @throws Exception
-     */
+	/**
+	 * Конструктор
+	 *
+	 * Применяет конструктор родительского класса и записывает экземпляр текущего класса в свойство $app.
+	 * Подробнее о свойстве $app см. self::app()
+	 *
+	 * @param string $plugin_path
+	 * @param array  $data
+	 *
+	 * @throws Exception
+	 */
 	public function __construct() {
 		if ( ! class_exists( 'WCL_Plugin' ) ) {
 			throw new Exception( 'Plugin Clearfy is not installed!' );
@@ -46,16 +46,16 @@ class WGA_Plugin {
 	}
 
 	/**
-     * Статический метод для быстрого доступа к интерфейсу плагина.
-     *
-     * Позволяет разработчику глобально получить доступ к экземпляру класса плагина в любом месте
-     * плагина, но при этом разработчик не может вносить изменения в основной класс плагина.
-     *
-     * Используется для получения настроек плагина, информации о плагине, для доступа к вспомогательным
-     * классам. 
-     * 
-     * @return WCL_Plugin
-     */	
+	 * Статический метод для быстрого доступа к интерфейсу плагина.
+	 *
+	 * Позволяет разработчику глобально получить доступ к экземпляру класса плагина в любом месте
+	 * плагина, но при этом разработчик не может вносить изменения в основной класс плагина.
+	 *
+	 * Используется для получения настроек плагина, информации о плагине, для доступа к вспомогательным
+	 * классам.
+	 *
+	 * @return WCL_Plugin
+	 */
 	public static function app() {
 		return self::$app;
 	}

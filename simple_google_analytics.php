@@ -4,7 +4,7 @@
  * Plugin URI: https://webcraftic.com
  * Description: Old plugin name: Simple Google Analytics. To improve Google Page Speed indicators Analytics caching is needed. However, it can also slightly increase your website loading speed, because Analytics js files will load locally. The second case that you might need these settings is the usual Google Analytics connection to your website. You do not need to do this with other plugins or insert the tracking code into your theme.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 3.1.0
+ * Version: 3.1.1
  * Text Domain: simple-google-analytics
  * Domain Path: /languages/
  * Author URI: http://webcraftic.com
@@ -51,6 +51,14 @@ $plugin_info = array(
 			'support'  => 'support',           // {site}/support
 			'docs'     => 'docs'               // {site}/docs
 		)
+	),
+
+	// PLUGIN ADVERTS
+	'render_adverts' => true,
+	'adverts_settings'    => array(
+		'dashboard_widget' => true, // show dashboard widget (default: false)
+		'right_sidebar'    => true, // show adverts sidebar (default: false)
+		'notice'           => true, // show notice message (default: false)
 	),
 
 	// FRAMEWORK MODULES
@@ -161,6 +169,16 @@ if ( ! defined( 'FACTORY_UPDATES_DEBUG' ) ) {
  */
 if ( ! defined( 'FACTORY_ADVERTS_DEBUG' ) ) {
 	define( 'FACTORY_ADVERTS_DEBUG', true );
+}
+
+/**
+ * Остановить показ рекламы для всех плагинов созданных на Factory фреймворке.
+ * Это может пригодиться в некоторых случаях, при неисправностях или из-за
+ * файрвола в стране пользователя. Чтобы реклама не обременяла пользователя
+ * он может ее заблокировать.
+ */
+if ( ! defined( 'FACTORY_ADVERTS_BLOCK' ) ) {
+	define( 'FACTORY_ADVERTS_BLOCK', false );
 }
 
 // the compiler library provides a set of functions like onp_build and onp_license

@@ -7,7 +7,7 @@
  * I usually register administrator notifications, create handlers before saving
  * plugin settings or after, register options in the Clearfy plugin.
  *
- * @author    Alex Kovalev <alex.kovalevv@gmail.com>
+ * @author    Alex Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright Webcraftic
  */
 
@@ -15,23 +15,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-/**
- * Удаляем лишние виджеты из правого сайдбара в интерфейсе плагина
- *
- * - Виджет с премиум рекламой
- * - Виджет с рейтингом
- * - Виджет с маркерами информации
- */
-add_filter( 'wbcr/factory/pages/impressive/widgets', function ( $widgets, $position, $plugin ) {
-	if ( WGA_Plugin::app()->getPluginName() == $plugin->getPluginName() && 'right' == $position ) {
-		unset( $widgets['businnes_suggetion'] );
-		unset( $widgets['rating_widget'] );
-		unset( $widgets['info_widget'] );
-	}
-
-	return $widgets;
-}, 20, 3 );
 
 /**
  * Notice that the plugin has been seriously updated!
@@ -67,7 +50,7 @@ function wbcr_ga_admin_conflict_notices_error( $notices, $plugin_name ) {
 	return $notices;
 }
 
-add_filter( 'wbcr_factory_notices_000_list', 'wbcr_ga_admin_conflict_notices_error', 10, 2 );
+add_filter( 'wbcr/factory/admin_notices', 'wbcr_ga_admin_conflict_notices_error', 10, 2 );
 
 /**
  * Migrate settings from the old plugin to the new one.
@@ -144,89 +127,6 @@ add_action( 'wbcr_factory_000_imppage_after_form_save', function ( $plugin, $pag
 	}
 }, 10, 2 );
 
-/**
- * This action is executed when the component of the Clearfy plugin
- * is activate and if this component is name ga_cache
- *
- * @since 3.0.1
- * @return void
- */
-add_action( 'wbcr/clearfy/activated_component', function ( $component_name ) {
-	if ( $component_name == 'ga_cache' ) {
-		require_once WGA_PLUGIN_DIR . '/admin/activation.php';
-		$plugin = new WGA_Activation( WGA_Plugin::app() );
-		$plugin->activate();
-	}
-} );
-
-/**
- * This action is executed when the component of the Clearfy plugin
- * is deactivated and if this component is name ga_cache
- *
- * @since 3.0.1
- * @return void
- */
-add_action( 'wbcr_clearfy_pre_deactivate_component', function ( $component_name ) {
-	if ( $component_name == 'ga_cache' ) {
-		require_once WGA_PLUGIN_DIR . '/admin/activation.php';
-		$plugin = new WGA_Activation( WGA_Plugin::app() );
-		$plugin->deactivate();
-	}
-} );
-
-/**
- * We register options of this plugin in global Clearfy options. Clearfy later can automatically
- * set default values for this options or completely delete it from site database.
- *
- * In more detail you can read about it here: wp-plugin-clearfy\admin\includes\options.php
- *
- * @param array $options   all available component options plugin clearfy
- *
- * @return array
- */
-function wbcr_ga_group_options( $options ) {
-	$options[] = [
-		'name'  => 'ga_cache',
-		'title' => __( 'Google Analytics Cache', 'simple-google-analytics' ),
-		'tags'  => []
-	];
-
-	$options[] = [
-		'name'  => 'ga_tracking_id',
-		'title' => __( 'Google analytic Code', 'clearfy' ),
-		'tags'  => []
-	];
-	$options[] = [
-		'name'  => 'ga_adjusted_bounce_rate',
-		'title' => __( 'Use adjusted bounce rate?', 'clearfy' ),
-		'tags'  => []
-	];
-	$options[] = [
-		'name'  => 'ga_enqueue_order',
-		'title' => __( 'Change enqueue order?', 'clearfy' ),
-		'tags'  => []
-	];
-	$options[] = [
-		'name'  => 'ga_disable_display_features',
-		'title' => __( 'Disable all display features functionality?', 'clearfy' ),
-		'tags'  => []
-	];
-	$options[] = [
-		'name'  => 'ga_anonymize_ip',
-		'title' => __( 'Use Anonymize IP? (Required by law for some countries)', 'clearfy' ),
-		'tags'  => []
-	];
-	$options[] = [
-		'name'  => 'ga_track_admin',
-		'title' => __( 'Track logged in Administrators?', 'clearfy' ),
-		'tags'  => []
-	];
-
-	return $options;
-}
-
-add_filter( "wbcr_clearfy_group_options", 'wbcr_ga_group_options' );
-
 if ( ! defined( 'LOADING_GA_CACHE_AS_ADDON' ) ) {
 	/**
 	 * Add a link to plugin meta. You can find this link in admin panel on
@@ -238,7 +138,8 @@ if ( ! defined( 'LOADING_GA_CACHE_AS_ADDON' ) ) {
 	 *
 	 * @return array
 	 */
-	function wbcr_ga_set_plugin_meta( $links, $file ) {
+
+	add_filter( 'plugin_row_meta', function ( $links, $file ) {
 		if ( $file == WGA_PLUGIN_BASE ) {
 
 			$url = 'https://clearfy.pro';
@@ -253,28 +154,121 @@ if ( ! defined( 'LOADING_GA_CACHE_AS_ADDON' ) ) {
 		}
 
 		return $links;
+	}, 10, 2 );
+
+	/**
+	 * Rating widget url
+	 *
+	 * @param string $page_url
+	 * @param string $plugin_name
+	 *
+	 * @return string
+	 */
+	add_filter( 'wbcr_factory_imppage_rating_widget_url', function ( $page_url, $plugin_name ) {
+		if ( ! defined( 'LOADING_GA_CACHE_AS_ADDON' ) && ( $plugin_name == WGA_Plugin::app()->getPluginName() ) ) {
+			return 'https://wordpress.org/support/plugin/simple-google-analytics/reviews/#new-post';
+		}
+
+		return $page_url;
+	}, 10, 2 );
+
+	/**
+	 * Удаляем лишние виджеты из правого сайдбара в интерфейсе плагина
+	 *
+	 * - Виджет с премиум рекламой
+	 * - Виджет с рейтингом
+	 * - Виджет с маркерами информации
+	 */
+	add_filter( 'wbcr/factory/pages/impressive/widgets', function ( $widgets, $position, $plugin ) {
+		if ( WGA_Plugin::app()->getPluginName() == $plugin->getPluginName() && 'right' == $position ) {
+			unset( $widgets['business_suggetion'] );
+			unset( $widgets['rating_widget'] );
+			unset( $widgets['info_widget'] );
+		}
+
+		return $widgets;
+	}, 20, 3 );
+} else {
+	/**
+	 * This action is executed when the component of the Clearfy plugin
+	 * is activate and if this component is name ga_cache
+	 *
+	 * @since 3.0.1
+	 * @return void
+	 */
+	add_action( 'wbcr/clearfy/activated_component', function ( $component_name ) {
+		if ( $component_name == 'ga_cache' ) {
+			require_once WGA_PLUGIN_DIR . '/admin/activation.php';
+			$plugin = new WGA_Activation( WGA_Plugin::app() );
+			$plugin->activate();
+		}
+	} );
+
+	/**
+	 * This action is executed when the component of the Clearfy plugin
+	 * is deactivated and if this component is name ga_cache
+	 *
+	 * @since 3.0.1
+	 * @return void
+	 */
+	add_action( 'wbcr_clearfy_pre_deactivate_component', function ( $component_name ) {
+		if ( $component_name == 'ga_cache' ) {
+			require_once WGA_PLUGIN_DIR . '/admin/activation.php';
+			$plugin = new WGA_Activation( WGA_Plugin::app() );
+			$plugin->deactivate();
+		}
+	} );
+
+	/**
+	 * We register options of this plugin in global Clearfy options. Clearfy later can automatically
+	 * set default values for this options or completely delete it from site database.
+	 *
+	 * In more detail you can read about it here: wp-plugin-clearfy\admin\includes\options.php
+	 *
+	 * @param array $options   all available component options plugin clearfy
+	 *
+	 * @return array
+	 */
+	function wbcr_ga_group_options( $options ) {
+		$options[] = [
+			'name'  => 'ga_cache',
+			'title' => __( 'Google Analytics Cache', 'simple-google-analytics' ),
+			'tags'  => []
+		];
+
+		$options[] = [
+			'name'  => 'ga_tracking_id',
+			'title' => __( 'Google analytic Code', 'clearfy' ),
+			'tags'  => []
+		];
+		$options[] = [
+			'name'  => 'ga_adjusted_bounce_rate',
+			'title' => __( 'Use adjusted bounce rate?', 'clearfy' ),
+			'tags'  => []
+		];
+		$options[] = [
+			'name'  => 'ga_enqueue_order',
+			'title' => __( 'Change enqueue order?', 'clearfy' ),
+			'tags'  => []
+		];
+		$options[] = [
+			'name'  => 'ga_disable_display_features',
+			'title' => __( 'Disable all display features functionality?', 'clearfy' ),
+			'tags'  => []
+		];
+		$options[] = [
+			'name'  => 'ga_anonymize_ip',
+			'title' => __( 'Use Anonymize IP? (Required by law for some countries)', 'clearfy' ),
+			'tags'  => []
+		];
+		$options[] = [
+			'name'  => 'ga_track_admin',
+			'title' => __( 'Track logged in Administrators?', 'clearfy' ),
+			'tags'  => []
+		];
+
+		return $options;
 	}
 
-	add_filter( 'plugin_row_meta', 'wbcr_ga_set_plugin_meta', 10, 2 );
+	add_filter( "wbcr_clearfy_group_options", 'wbcr_ga_group_options' );
 }
-
-/**
- * Rating widget url
- *
- * @param string $page_url
- * @param string $plugin_name
- *
- * @return string
- */
-function wbcr_ga_rating_widget_url( $page_url, $plugin_name ) {
-	if ( ! defined( 'LOADING_GA_CACHE_AS_ADDON' ) && ( $plugin_name == WGA_Plugin::app()->getPluginName() ) ) {
-		return 'https://wordpress.org/support/plugin/simple-google-analytics/reviews/#new-post';
-	}
-
-	return $page_url;
-}
-
-add_filter( 'wbcr_factory_imppage_rating_widget_url', 'wbcr_ga_rating_widget_url', 10, 2 );
-
-
-
