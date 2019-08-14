@@ -74,10 +74,6 @@ We invite you to check out a few other related free plugins that our team has al
 == Screenshots ==
 1. Control panel
 
-== Frequently Asked Questions ==
-= Does plugin work with multisite? =
-No plugin does not support multisites. This is temporary and we will try to add support for networks in the future.
-
 == Changelog ==
 = 3.1.1 =
 * Added: Compatibility with Wordpress 4.2 - 5.x
