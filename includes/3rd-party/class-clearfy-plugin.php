@@ -84,7 +84,7 @@ class WGA_Plugin {
 	 * @since  3.0.0
 	 */
 	private function global_scripts() {
-		require( WGA_PLUGIN_DIR . '/includes/classes/class.configurate-ga.php' );
+		require( WGA_PLUGIN_DIR . '/includes/classes/class-configurate-ga.php' );
 		new WGA_ConfigGACache( self::$app );
 	}
 }
