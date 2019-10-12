@@ -75,6 +75,9 @@ We invite you to check out a few other related free plugins that our team has al
 1. Control panel
 
 == Changelog ==
+= 3.1.2 =
+* Fixed: A bug with creating a local copy of the Google analytics library.
+
 = 3.1.1 =
 * Added: Compatibility with Wordpress 4.2 - 5.x
 * Added: Multisite support
