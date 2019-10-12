@@ -82,16 +82,16 @@ class WGA_ConfigGACache extends Wbcr_FactoryClearfy000_Configurate {
 	public function print_google_analytics() {
 
 		$tracking_id = $this->getPopulateOption( 'ga_tracking_id' );
-		$track_admin = $this->getPopulateOption( 'ga_track_admin' );
+		$track_admin = (int) $this->getPopulateOption( 'ga_track_admin' );
 
 		// If user is admin we don't want to render the tracking code, when option is disabled.
 		if ( empty( $tracking_id ) || ( current_user_can( 'manage_options' ) && ( ! $track_admin ) ) ) {
 			return;
 		}
 
-		$adjusted_bounce_rate     = $this->getPopulateOption( 'ga_adjusted_bounce_rate', 0 );
-		$anonymize_ip             = $this->getPopulateOption( 'ga_anonymize_ip', false );
-		$disable_display_features = $this->getPopulateOption( 'ga_disable_display_features', false );
+		$adjusted_bounce_rate     = (int) $this->getPopulateOption( 'ga_adjusted_bounce_rate', 0 );
+		$anonymize_ip             = (int) $this->getPopulateOption( 'ga_anonymize_ip', 0 );
+		$disable_display_features = (int) $this->getPopulateOption( 'ga_disable_display_features', 0 );
 
 		echo "<!-- Google Analytics Local by " . $this->plugin->getPluginTitle() . " -->" . PHP_EOL;
 
@@ -99,7 +99,7 @@ class WGA_ConfigGACache extends Wbcr_FactoryClearfy000_Configurate {
 		echo "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','" . WGA_PLUGIN_URL . "/cache/local-ga.js','ga');" . PHP_EOL;
+            })(window,document,'script','" . esc_url( $this->get_local_analytic_file_url() ) . "','ga');" . PHP_EOL;
 
 		/**
 		 * Allows you to complement the current configuration analytics.
@@ -119,7 +119,7 @@ class WGA_ConfigGACache extends Wbcr_FactoryClearfy000_Configurate {
 			'disable_display_features' => $disable_display_features
 		] );
 
-		echo "ga('create', '" . $tracking_id . "', 'auto');" . PHP_EOL;
+		echo "ga('create', '" . esc_attr( $tracking_id ) . "', 'auto');" . PHP_EOL;
 		echo $disable_display_features ? "ga('set', 'displayFeaturesTask', null);" . PHP_EOL : '';
 		echo $anonymize_ip ? "ga('set', 'anonymizeIp', true);" . PHP_EOL : '';
 		echo "ga('send', 'pageview');";
@@ -141,11 +141,11 @@ class WGA_ConfigGACache extends Wbcr_FactoryClearfy000_Configurate {
 		$tracking_id = $this->getPopulateOption( 'ga_tracking_id' );
 
 		if ( ! empty( $tracking_id ) ) {
-			$local_ga_file = WGA_PLUGIN_DIR . '/cache/local-ga.js';
+			$local_ga_file = $this->get_local_analytic_file_path();
 			// If file is not created yet, create now!
-			if ( ! file_exists( $local_ga_file ) ) {
+			if ( $local_ga_file && ! file_exists( $local_ga_file ) ) {
 				ob_start();
-				do_action( 'wbcr_ga_update_local_script' );
+				$this->update_local_analytic();
 				ob_end_clean();
 			}
 
@@ -157,5 +157,51 @@ class WGA_ConfigGACache extends Wbcr_FactoryClearfy000_Configurate {
 				add_action( 'wp_footer', [ $this, 'print_google_analytics' ], $enqueue_order );
 			}
 		}
+	}
+
+	/**
+	 * Get uploads dir
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  3.1.1
+	 */
+	private function get_uploads_dir() {
+		$upload_dir = wp_upload_dir();
+
+		if ( true === $upload_dir['error'] ) {
+			return null;
+		}
+
+		return (object) $upload_dir;
+	}
+
+	/**
+	 * Get the path to an encrypted google analytics file
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  3.1.1
+	 * @return string|null
+	 */
+	private function get_local_analytic_file_url() {
+		if ( $this->get_uploads_dir() ) {
+			return untrailingslashit( $this->get_uploads_dir()->baseurl ) . '/wga-cache/local-ga.js';
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get the url to an encrypted google analytics file
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 * @since  3.1.1
+	 * @return string|null
+	 */
+	private function get_local_analytic_file_path() {
+		if ( $this->get_uploads_dir() ) {
+			return untrailingslashit( $this->get_uploads_dir()->basedir ) . '/wga-cache/local-ga.js';
+		}
+
+		return null;
 	}
 }

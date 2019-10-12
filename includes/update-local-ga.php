@@ -12,7 +12,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Remote file to download.
 $remote_file = 'https://www.google-analytics.com/analytics.js';
-$local_file  = WGA_PLUGIN_DIR . '/cache/local-ga.js';
+
+$upload_dir = wp_upload_dir();
+
+if ( true === $upload_dir['error'] ) {
+	return;
+}
+
+$cache_dir = untrailingslashit( $upload_dir['basedir'] ) . '/wga-cache';
+
+if ( ! file_exists( $cache_dir ) ) {
+	if ( ! wp_mkdir_p( $cache_dir ) ) {
+		return;
+	}
+}
+
+$local_file = $cache_dir . '/local-ga.js';
 
 // Connection time out.
 $conn_timeout = 10;
