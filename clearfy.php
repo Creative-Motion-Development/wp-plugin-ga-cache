@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! defined( 'WGA_PLUGIN_ACTIVE' ) ) {
 	define( 'WGA_PLUGIN_VERSION', '3.1.1' );
+	define( 'WGA_TEXT_DOMAIN', 'simple-google-analytics' );
 	define( 'WGA_PLUGIN_ACTIVE', true );
 
 	// Этот плагин загружен, как аддон для плагина Clearfy
