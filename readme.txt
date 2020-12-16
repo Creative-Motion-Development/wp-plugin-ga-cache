@@ -3,7 +3,7 @@ Tags: analytics,google analytics,google analytics dashboard,google analytics plu
 Contributors: webcraftic, alexkovalevv, JeromeMeyer62, creativemotion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
-Tested up to: 5.2
+Tested up to: 5.6
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2
