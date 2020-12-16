@@ -75,6 +75,10 @@ We invite you to check out a few other related free plugins that our team has al
 1. Control panel
 
 == Changelog ==
+= 3.1.3 =
+* Added: Subscribe form
+* Fixed: Minor bugs
+
 = 3.1.2 =
 * Fixed: A bug with creating a local copy of the Google analytics library.
 
