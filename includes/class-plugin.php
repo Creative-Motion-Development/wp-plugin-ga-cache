@@ -1,6 +1,6 @@
 <?php
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
+if( !defined('ABSPATH') ) {
 	exit;
 }
 
@@ -31,19 +31,20 @@ class WGA_Plugin extends Wbcr_Factory000_Plugin {
 	 * Подробнее о свойстве $app см. self::app()
 	 *
 	 * @param string $plugin_path
-	 * @param array  $data
+	 * @param array $data
 	 *
 	 * @throws Exception
 	 */
-	public function __construct( $plugin_path, $data ) {
-		parent::__construct( $plugin_path, $data );
+	public function __construct($plugin_path, $data)
+	{
+		parent::__construct($plugin_path, $data);
 
-		self::$app         = $this;
+		self::$app = $this;
 		$this->plugin_data = $data;
 
 		$this->global_scripts();
 
-		if ( is_admin() ) {
+		if( is_admin() ) {
 			$this->init_activation();
 			$this->admin_scripts();
 		}
@@ -60,7 +61,8 @@ class WGA_Plugin extends Wbcr_Factory000_Plugin {
 	 *
 	 * @return \Wbcr_Factory000_Plugin|\WGA_Plugin
 	 */
-	public static function app() {
+	public static function app()
+	{
 		return self::$app;
 	}
 
@@ -68,9 +70,10 @@ class WGA_Plugin extends Wbcr_Factory000_Plugin {
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @since  3.0.0
 	 */
-	private function init_activation() {
-		require_once( WGA_PLUGIN_DIR . '/admin/activation.php' );
-		self::app()->registerActivation( 'WGA_Activation' );
+	private function init_activation()
+	{
+		require_once(WGA_PLUGIN_DIR . '/admin/activation.php');
+		self::app()->registerActivation('WGA_Activation');
 	}
 
 	/**
@@ -81,30 +84,32 @@ class WGA_Plugin extends Wbcr_Factory000_Plugin {
 	 * и в меню боковой панели администратора. Регистрируемые страницы будут связаны с текущим плагином
 	 * все операции выполняемые внутри классов страниц, имеют отношение только текущему плагину.
 	 *
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  3.0.0
 	 * @throws \Exception
+	 * @since  3.0.0
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 */
-	private function register_pages() {
-		if ( $this->as_addon ) {
+	private function register_pages()
+	{
+		if( $this->as_addon ) {
 			return;
 		}
 
-		if ( $this->isNetworkActive() and ! is_network_admin() ) {
+		if( $this->isNetworkActive() and !is_network_admin() ) {
 			return;
 		}
-		self::app()->registerPage( 'WGA_CachePage', WGA_PLUGIN_DIR . '/admin/pages/class-pages-general-settings.php' );
-		self::app()->registerPage( 'WGA_MoreFeaturesPage', WGA_PLUGIN_DIR . '/admin/pages/class-pages-more-features.php' );
+		self::app()->registerPage('WGA_CachePage', WGA_PLUGIN_DIR . '/admin/pages/class-pages-general-settings.php');
+		self::app()->registerPage('WGA_MoreFeaturesPage', WGA_PLUGIN_DIR . '/admin/pages/class-pages-more-features.php');
 	}
 
 	/**
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  3.1.0
 	 * @throws \Exception
+	 * @since  3.1.0
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 */
-	private function admin_scripts() {
-		require( WGA_PLUGIN_DIR . '/admin/options.php' );
-		require( WGA_PLUGIN_DIR . '/admin/boot.php' );
+	private function admin_scripts()
+	{
+		require(WGA_PLUGIN_DIR . '/admin/options.php');
+		require(WGA_PLUGIN_DIR . '/admin/boot.php');
 
 		$this->register_pages();
 	}
@@ -113,9 +118,13 @@ class WGA_Plugin extends Wbcr_Factory000_Plugin {
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @since  3.0.0
 	 */
-	private function global_scripts() {
-		require( WGA_PLUGIN_DIR . '/includes/classes/class-configurate-ga.php' );
-		new WGA_ConfigGACache( self::$app );
+	private function global_scripts()
+	{
+		require(WGA_PLUGIN_DIR . '/includes/classes/class-configurate-ga.php');
+		new WGA_ConfigGACache(self::$app);
+
+		require(WGA_PLUGIN_DIR . '/includes/classes/class-scheduler.php');
+		new \WGA\Busting\Sheduller();
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
+if( !defined('ABSPATH') ) {
 	exit;
 }
 
@@ -26,20 +26,21 @@ class WGA_Plugin {
 	 * Подробнее о свойстве $app см. self::app()
 	 *
 	 * @param string $plugin_path
-	 * @param array  $data
+	 * @param array $data
 	 *
 	 * @throws Exception
 	 */
-	public function __construct() {
-		if ( ! class_exists( 'WCL_Plugin' ) ) {
-			throw new Exception( 'Plugin Clearfy is not installed!' );
+	public function __construct()
+	{
+		if( !class_exists('WCL_Plugin') ) {
+			throw new Exception('Plugin Clearfy is not installed!');
 		}
 
 		self::$app = WCL_Plugin::app();
 
 		$this->global_scripts();
 
-		if ( is_admin() ) {
+		if( is_admin() ) {
 			$this->init_activation();
 			$this->admin_scripts();
 		}
@@ -56,7 +57,8 @@ class WGA_Plugin {
 	 *
 	 * @return WCL_Plugin
 	 */
-	public static function app() {
+	public static function app()
+	{
 		return self::$app;
 	}
 
@@ -64,27 +66,35 @@ class WGA_Plugin {
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @since  3.0.0
 	 */
-	private function init_activation() {
-		require_once( WGA_PLUGIN_DIR . '/admin/activation.php' );
-		self::app()->registerActivation( 'WGA_Activation' );
+	private function init_activation()
+	{
+		require_once(WGA_PLUGIN_DIR . '/admin/activation.php');
+		self::app()->registerActivation('WGA_Activation');
 	}
 
 	/**
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  3.0.0
 	 * @throws \Exception
+	 * @since  3.0.0
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 */
-	private function admin_scripts() {
-		require( WGA_PLUGIN_DIR . '/admin/options.php' );
-		require( WGA_PLUGIN_DIR . '/admin/boot.php' );
+	private function admin_scripts()
+	{
+		require(WGA_PLUGIN_DIR . '/admin/options.php');
+		require(WGA_PLUGIN_DIR . '/admin/boot.php');
 	}
 
 	/**
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @since  3.0.0
 	 */
-	private function global_scripts() {
-		require( WGA_PLUGIN_DIR . '/includes/classes/class-configurate-ga.php' );
-		new WGA_ConfigGACache( self::$app );
+	private function global_scripts()
+	{
+		require(WGA_PLUGIN_DIR . '/includes/classes/class-configurate-ga.php');
+		new WGA_ConfigGACache(self::$app);
+
+		add_action('plugins_loaded', function () {
+			require(WGA_PLUGIN_DIR . '/includes/classes/class-scheduler.php');
+			new \WGA\Busting\Sheduller();
+		});
 	}
 }
