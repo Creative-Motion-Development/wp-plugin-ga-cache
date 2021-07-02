@@ -107,7 +107,7 @@ class Sheduller {
 
 		$schedules['weekly'] = [
 			'interval' => 604800,
-			'display' => __('weekly', 'rocket'),
+			'display' => __('weekly', 'clearfy'),
 		];
 
 		return $schedules;

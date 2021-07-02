@@ -239,10 +239,10 @@ class Facebook_SDK {
 	private function update_file_contents($file_path, $file_contents)
 	{
 		if( !$this->filesystem->exists($this->busting_path) ) {
-			\rocket_mkdir_p($this->busting_path);
+			wp_mkdir_p($this->busting_path);
 		}
 
-		if( !\rocket_put_content($file_path, $file_contents) ) {
+		if( !$this->filesystem->put_contents($file_path, $file_contents) ) {
 			\WGA_Plugin::app()->logger->error('Contents could not be written into file. File path ' . $file_path);
 
 			return false;
