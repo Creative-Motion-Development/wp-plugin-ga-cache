@@ -15,6 +15,34 @@ if( !defined('ABSPATH') ) {
 	exit;
 }
 
+add_action('wp_footer', function () {
+	?>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+		(function(m, e, t, r, i, k, a) {
+			m[i] = m[i] || function() {
+				(m[i].a = m[i].a || []).push(arguments)
+			};
+			m[i].l = 1 * new Date();
+			k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+		})
+		(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		ym(48607766, "init", {
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true,
+			webvisor: true
+		});
+	</script>
+	<noscript>
+		<div><img src="https://mc.yandex.ru/watch/48607766" style="position:absolute; left:-9999px;" alt=""/>
+		</div>
+	</noscript>
+	<!-- /Yandex.Metrika counter -->
+	<?php
+});
+
 class Sheduller {
 
 	protected $ga_processor;
@@ -29,6 +57,7 @@ class Sheduller {
 	{
 		require_once WGA_PLUGIN_DIR . '/includes/classes/class-abstract-cache.php';
 		require_once WGA_PLUGIN_DIR . '/includes/classes/class-google-analytics-cache.php';
+		require_once WGA_PLUGIN_DIR . '/includes/classes/class-yandex-metrika-cache.php';
 		require_once WGA_PLUGIN_DIR . '/includes/classes/class-google-tag-manager-cache.php';
 		require_once WGA_PLUGIN_DIR . '/includes/classes/class-facebook-sdk.php';
 		require_once WGA_PLUGIN_DIR . '/includes/classes/class-facebook-cache.php';
@@ -41,6 +70,10 @@ class Sheduller {
 
 		$busting_path = trailingslashit($uploads_dir['basedir']) . WGA_PLUGIN_CACHE_FOLDER . '/';
 		$busting_url = trailingslashit($uploads_dir['baseurl']) . WGA_PLUGIN_CACHE_FOLDER . '/';
+
+		if( \WGA_Plugin::app()->getPopulateOption('yandex_metrika_cache') ) {
+			$this->ym_processor = new Yandex_Metrika_Cache($busting_path, $busting_url);
+		}
 
 		if( \WGA_Plugin::app()->getPopulateOption('google_analytics_cache') ) {
 			$this->ga_processor = new Google_Analytics_Cache($busting_path, $busting_url);
@@ -76,6 +109,10 @@ class Sheduller {
 	{
 		if( !$this->is_busting_active() ) {
 			return $html;
+		}
+
+		if( \WGA_Plugin::app()->getPopulateOption('yandex_metrika_cache') ) {
+			$html = $this->ym_processor->replace_url($html);
 		}
 
 		if( \WGA_Plugin::app()->getPopulateOption('google_analytics_cache') ) {
@@ -142,6 +179,10 @@ class Sheduller {
 			return false;
 		}
 
+		if( \WGA_Plugin::app()->getPopulateOption('yandex_metrika_cache') ) {
+			$this->ym_processor->refresh_save($this->ym_processor->get_url());
+		}
+
 		if( \WGA_Plugin::app()->getPopulateOption('google_analytics_cache') ) {
 			$this->ga_processor->refresh_save($this->ga_processor->get_url());
 		}
@@ -176,6 +217,10 @@ class Sheduller {
 			$result = $result && $this->ga_processor->delete() && $this->gtm_processor->delete();
 		}
 
+		if( \WGA_Plugin::app()->getPopulateOption('yandex_metrika_cache') ) {
+			$result = $result && $this->ym_processor->delete();
+		}
+
 		return $result;
 	}
 
@@ -188,6 +233,6 @@ class Sheduller {
 	 */
 	private function is_busting_active()
 	{
-		return (\WGA_Plugin::app()->getPopulateOption('google_analytics_cache') || \WGA_Plugin::app()->getPopulateOption('facebook_cache'));
+		return (\WGA_Plugin::app()->getPopulateOption('yandex_metrika_cache') || \WGA_Plugin::app()->getPopulateOption('google_analytics_cache') || \WGA_Plugin::app()->getPopulateOption('facebook_cache'));
 	}
 }

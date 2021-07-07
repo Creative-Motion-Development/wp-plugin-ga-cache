@@ -48,6 +48,16 @@ function wbcr_ga_get_plugin_options()
 	$options[] = [
 		'type' => 'checkbox',
 		'way' => 'buttons',
+		'name' => 'yandex_metrika_cache',
+		'title' => __('Improve browser caching for Yandex metrika', 'simple-google-analytics'),
+		'layout' => ['hint-type' => 'icon', 'hint-icon-color' => 'grey'],
+		'hint' => __('Clearfy will host these Yandex metrika scripts locally on your server to help satisfy the PageSpeed recommendation for Leverage browser caching..', 'simple-google-analytics') . (WGA_Plugin::app()->getPopulateOption('ga_cache') ? '<br>--<br><span class="wbcr-factory-light-orange-color">' . __('ATTENTION! Before using this option, please disable the option "Add Google Analytics code and Cache"!', 'simple-google-analytics') . '</span>' : ''),
+		'default' => false
+	];
+
+	$options[] = [
+		'type' => 'checkbox',
+		'way' => 'buttons',
 		'name' => 'ga_cache',
 		'title' => __('Add Google Analytics code and Cache', 'simple-google-analytics'),
 		//'layout' => ['hint-type' => 'icon', 'hint-icon-color' => 'grey'],
