@@ -2,9 +2,9 @@
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,gtag
 Contributors: webcraftic, alexkovalevv, JeromeMeyer62, creativemotion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
-Requires at least: 4.2
-Tested up to: 5.6
-Requires PHP: 5.4
+Requires at least: 5.2
+Tested up to: 5.8
+Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2
 
@@ -75,6 +75,10 @@ We invite you to check out a few other related free plugins that our team has al
 1. Control panel
 
 == Changelog ==
+= 3.2.2 (20.10.2021) =
+* Added: Compatibility with Wordpress 5.8
+* Fixed: Minor bugs
+
 = 3.1.3 =
 * Added: Subscribe form
 * Fixed: Minor bugs
