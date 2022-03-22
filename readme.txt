@@ -75,6 +75,9 @@ We invite you to check out a few other related free plugins that our team has al
 1. Control panel
 
 == Changelog ==
+= 3.2.4 (24.03.2022) =
+* Added: Compatibility with Disable admin notices plugin
+
 = 3.2.3 (23.03.2022) =
 * Added: Compatibility with Wordpress 5.9
 * Fixed: Minor bugs
