@@ -2,6 +2,8 @@
   "assemblies": {
     "__global__": {
       "delete": [
+        "__MACOSX",
+        ".DS_Store",
         "/libs/onepress/compiler",
         "compiler.ini",
         "package.json",
@@ -96,7 +98,7 @@
     }
   },
   "constants": {
-    "version": "3.2.4",
+    "version": "3.2.5",
     "api": "http://api.byonepress.com/1.1/",
     "name": [
       {

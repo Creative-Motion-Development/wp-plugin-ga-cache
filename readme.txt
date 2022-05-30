@@ -3,7 +3,7 @@ Tags: analytics,google analytics,google analytics dashboard,google analytics plu
 Contributors: webcraftic, alexkovalevv, JeromeMeyer62, creativemotion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 5.2
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2
@@ -75,6 +75,9 @@ We invite you to check out a few other related free plugins that our team has al
 1. Control panel
 
 == Changelog ==
+= 3.2.5 (30.05.2022) =
+* Added: Compatibility with Wordpress 6.0
+
 = 3.2.4 (24.03.2022) =
 * Added: Compatibility with Disable admin notices plugin
 
