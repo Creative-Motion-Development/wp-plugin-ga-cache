@@ -103,7 +103,7 @@ define('WGA_PLUGIN_ACTIVE', true);
 define('WGA_PLUGIN_VERSION', $wga_compatibility->get_plugin_version());
 define('WGA_PLUGIN_DIR', dirname(__FILE__));
 define('WGA_PLUGIN_BASE', plugin_basename(__FILE__));
-define('WGA_PLUGIN_URL', plugins_url(null, __FILE__));
+define('WGA_PLUGIN_URL', plugins_url('', __FILE__));
 define('WGA_PLUGIN_CACHE_FOLDER', 'wga-cache');
 
 #comp remove

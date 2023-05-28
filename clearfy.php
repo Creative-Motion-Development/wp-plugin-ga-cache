@@ -31,7 +31,7 @@ if( !defined('WGA_PLUGIN_ACTIVE') ) {
 	}
 
 	if( !defined('WGA_PLUGIN_URL') ) {
-		define('WGA_PLUGIN_URL', plugins_url(null, __FILE__));
+		define('WGA_PLUGIN_URL', plugins_url('', __FILE__));
 	}
 
 	if( !defined('WGA_PLUGIN_CACHE_FOLDER') ) {
